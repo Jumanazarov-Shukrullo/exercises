@@ -26,6 +26,7 @@ int main() {
             {{3, 2}, 1},
             {{3, 3}, 2}
     };
+    /// P.S in order to use std::find you should set version of Clion to 20
     auto it = std::find(vec.begin(), vec.end(), map[std::make_pair(1,2)]);
     for (auto i : vec) {
         if (it != vec.end())
