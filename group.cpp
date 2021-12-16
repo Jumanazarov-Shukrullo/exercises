@@ -1,5 +1,5 @@
 /// Program that check given set of numbers
-/// and dictionary make group or not
+/// and dictionary is a group or not
 
 #include <bits/stdc++.h>
 
@@ -19,9 +19,11 @@ bool IsGroup(std::set<size_t> &set, std::map<Pair, size_t> &map) {
     std::vector<size_t> vec;
     for (auto i: set) {
         for (auto j: set) {
+            /// Check whether the elements of our set exist in dictionary or not
             if (!set.contains(map[std::make_pair(i, j)])) {
                 return false;
             }
+            /// Check for associativity property
             for (auto k: set) {
                 size_t first_temp = map[std::make_pair(i, j)];
                 size_t second_temp = map[std::make_pair(j, k)];
@@ -39,12 +41,13 @@ bool IsGroup(std::set<size_t> &set, std::map<Pair, size_t> &map) {
                 inverse_element++;
         }
     }
+    /// If our inverse element doesnt suit with the size of our set return false 
     if (inverse_element != set.size())
         return false;
     return true;
 }
 
-bool IsAbelian(std::set<size_t> &vector, std::map<Pair, size_t> &map) {
+bool IsAbelianGroup(std::set<size_t> &vector, std::map<Pair, size_t> &map) {
 
     /// firstly check whether it is a group or not
     if (!IsGroup(vector, map)) {
@@ -73,8 +76,16 @@ void Solve() {
         std::cin >> m >> n >> value;
         dict.insert(std::make_pair(std::make_pair(m, n), value));
     }
-    std::cout << IsGroup(set, dict) << "\n";
-    std::cout << IsAbelian(set, dict);
+    if (IsGroup(set, dict)) {
+        std::cout << "Our set is a group" << "\n";
+        if (IsAbelianGroup(set, dict)) {
+            std::cout << "Our set is an Abelian group" << "\n";
+        } else {
+            std::cout << "Our set is not an Abelian group" << "\n";
+        }
+    } else {
+        std::cout << "Our set is not  a group" << "\n";
+    }
 }
 
 int main() {
