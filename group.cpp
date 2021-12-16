@@ -31,17 +31,22 @@ bool IsGroup(std::set<size_t> &set, std::map<Pair, size_t> &map) {
                     return false;
                 }
             }
+            /// if i find the neutral element in the set i will make equal to the second key of dictionary
+            /// the purpose of the increasing the counter one is that when i find the different  neutral element
+            /// i will return false after this if because of uniqueness of the neutral element 
             if (map[std::make_pair(i, j)] == i && counter == 0) {
                 neutral_element = j;
                 counter++;
             }
+            /// why counter is >0 because i set is as 1 and when i come here and check whether i have 2 different 
+            /// neutral elements and i return false
             if (map[std::make_pair(i, j)] == i && counter > 0 && j != neutral_element)
                 return false;
             if (map[std::make_pair(i, j)] == neutral_element)
                 inverse_element++;
         }
     }
-    /// If our inverse element doesnt suit with the size of our set return false 
+    /// If our inverse element doesnt suit with the size of our set return false
     if (inverse_element != set.size())
         return false;
     return true;
@@ -53,7 +58,7 @@ bool IsAbelianGroup(std::set<size_t> &vector, std::map<Pair, size_t> &map) {
     if (!IsGroup(vector, map)) {
         return false;
     }
-    /// Check whether it has additivity property
+    /// Check whether it has commutativity property
     for (auto i: vector) {
         for (auto j: vector) {
             if (map[std::make_pair(i, j)] != map[std::make_pair(j, i)]) {
@@ -68,7 +73,7 @@ void Solve() {
     size_t size_of_map;
     std::cout << "Enter size of map: ";
     std::cin >> size_of_map;
-    std::set<size_t> set = {0, 1, 2, 3, 4};
+    std::set<size_t> set = {0, 1, 2};
     std::map<Pair, size_t> dict;
     /// Make a dictionary
     for (int i = 0; i < size_of_map; ++i) {
