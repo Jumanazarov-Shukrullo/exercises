@@ -48,6 +48,9 @@ bool IsGroup(std::set<size_t> &set, std::map<Pair, size_t> &map) {
             /// neutral elements and i return false
             if (map[std::make_pair(i, j)] == i && counter > 0 && j != neutral_element)
                 return false;
+            
+            if (map[std::make_pair(i, j)] == j && counter > 0 && i != neutral_element)
+                return false;
         }
     }
     for (auto i : set) {
