@@ -41,33 +41,15 @@ MainWindow::~MainWindow()
 
 
 void MainWindow::NumPressed() {
-    // Sender returns a pointer to the button pressed
         QPushButton *button = (QPushButton *)sender();
-
-        // Get number on button
         QString butVal = button->text();
-
-        // Get the value in the display
         QString displayVal = ui->Display->text();
-
         if((displayVal.toDouble() == 0) || (displayVal.toDouble() == 0.0)){
-
-            // calcVal = butVal.toDouble();
             ui->Display->setText(butVal);
-
         } else {
-            // Put the new number to the right of whats there
             QString newVal = displayVal + butVal;
-
-            // Double version of number
             double dblNewVal = newVal.toDouble();
-
-            // calcVal = newVal.toDouble();
-
-            // Set value in display and allow up to 16
-            // digits before using exponents
             ui->Display->setText(QString::number(dblNewVal, 'g', 16));
-
         }
 }
 
